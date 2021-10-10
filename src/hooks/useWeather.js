@@ -53,7 +53,7 @@ const useWeather = (location) => {
     })()
 
     return () => console.log('clean up')
-  }, [])
+  }, [location])
 
   // setTemperature(fahrenheitToCelsius(data))
 

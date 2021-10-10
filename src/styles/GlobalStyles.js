@@ -12,8 +12,15 @@ export default createGlobalStyle`
     max-width: 100%;
     max-height: 100%;
   }
+  *, button, input {
+    background: none;
+    border: 0;
+    border-radius: 14px;
+  }
+
   html {
     background: var(--primary);
+    color: var(--text);
   }
   :root{
     --primary: #85447A;

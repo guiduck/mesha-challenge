@@ -37,8 +37,12 @@ const useUserData = () => {
     isLoaded: songsIsLoaded 
   } = useSongByGenre(getGenre(userTemperature), temperatureIsLoaded);
 
+  console.log(userTemperature)
+  console.log(userLocation)
+  console.log(userSongs)
   //set user data state - maybe do it in another component
   useEffect(() => {
+    if(locationIsLoaded && songsIsLoaded && temperatureIsLoaded)
         setUserData({
           temperature: userTemperature,
           location: userLocation,

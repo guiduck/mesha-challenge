@@ -8,9 +8,10 @@ export const Container = styled.div`
 `;
 
 export const Button = styled.button`
-  height: 25%;
+  height: 15%;
   width: 100%;
   background-color: var(--secondary);
+  color: var(--text);
 `;
 
 export const Title = styled.h1`
