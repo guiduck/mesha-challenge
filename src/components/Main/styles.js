@@ -7,7 +7,7 @@ export const Container = styled.div`
   width: auto;
 `;
 
-export const Button = styled.button`
+export const GetSongsButton = styled.button`
   height: 15%;
   width: 100%;
   background-color: var(--secondary);

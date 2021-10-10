@@ -1,21 +1,30 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 import SongList from '../SongList';
 import FavoriteSongs from '../FavoriteSongs';
+import useUserData from '../../hooks/useUserData';
 
 import { 
   Container, 
-  Button,
-  Title
+  GetSongsButton
 } from './styles'
 
 export default function Main() {
+  const [userFavorites, setUserFavorites] = useState([]);
+  const [userIsLoading, setUserIsLoading] = useState(true);
+    
+  const data = useUserData();
+  console.log(data)
 
-  const [isLoading, setIsLoading] = useState(true);
-  const [favoriteSongList, setFavoriteSongList] = useState([]);
-    
   const clickHandler = () => {
-    
+    console.log('has clicked')
+    setUserFavorites(data.songs);
+    if(userFavorites) {
+      console.log(userFavorites);
+      setUserIsLoading(false);
+    } else {
+      console.log('user still loading in main');
+    }
   }
 
   return (
@@ -27,8 +36,13 @@ export default function Main() {
       {songList && <SongList songs={songList} />} */}
       {/* <FavoriteSongs userFavorites={songList} /> */}
       <SongList />
+
+      {
+        userIsLoading && <div>Loading...</div>,
+        !userIsLoading && <FavoriteSongs userFavorites={userFavorites} />
+      }
       
-      <Button onClick={clickHandler}>get songs</Button>
+      <GetSongsButton onClick={clickHandler}>get songs</GetSongsButton>
     </Container>
   )
 }

@@ -1,24 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import FavoriteSongItem from '../FavoriteSongItem';
 
-import { Container, Song, Button } from './styles';
+import { Container } from './styles';
 
 export default function FavoriteSongs({userFavorites}) {
 
   const [favorites, setFavorites] = useState(userFavorites);
 
-  const handleDelete = (name) => {
-    const newFavorites = userFavorites.filter((favorite) => favorite.artist.name !== name);
-    setFavorites(newFavorites);
-  }
+  useEffect(() => {
+    setFavorites(userFavorites);
+  }, [favorites])
 
   return (
     <Container>
-      {favorites.map((song) => {
+      {
+        favorites &&
+        favorites.map((song) => {
         return (
-          <Song>
-            artist: {song.artist.name}
-            <Button onClick={handleDelete(song.artist.name)}>delete from favorites</Button>
-          </Song>          
+          <>
+            <FavoriteSongItem
+              artistName={song.artist.name} 
+              songName={song.title} 
+              thumbnail={song.album.cover_medium} 
+            />             
+          </>
         )
       })}
     </Container>

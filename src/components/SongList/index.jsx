@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import SongItem from '../SongItem';
+
 import useUserData from '../../hooks/useUserData';
 
-import { Container, Song } from './styles';
+import { Container } from './styles';
 
 export default function SongList() {
 
@@ -23,9 +25,11 @@ export default function SongList() {
         songs &&
         songs.map((song) => {
           return(
-            <Song>
-              artist: {song.artist.name}
-            </Song>
+            <SongItem 
+              artistName={song.artist.name} 
+              songName={song.title} 
+              thumbnail={song.album.cover_medium} 
+           />
           )          
         })
       }
