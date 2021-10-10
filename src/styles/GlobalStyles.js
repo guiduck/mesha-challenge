@@ -22,4 +22,4 @@ export default createGlobalStyle`
     --details: #FFC4FF;
     --text: #FFE8E6;
   }
-`
+`;

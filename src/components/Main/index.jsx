@@ -1,69 +1,55 @@
 import React, { useState, useEffect } from 'react'
 import useUserData from '../../hooks/useUserData';
 
-// import getGenre from '../../utils/getGenre'
+import SongList from '../SongList';
+import FavoriteSongs from '../FavoriteSongs';
 
-// import useWeather from '../../hooks/useWeather'
-// import useSongByGenre from '../../hooks/useSongByGenre'
-
-import { Container } from './styles'
+import { 
+  Container, 
+  Button,
+  Title
+} from './styles'
 
 export default function Main() {
 
-  // const [userData, setUserData] = useState({
-  //   temperature: null,
-  //   location: {
-  //     city: '',
-  //     country: '',
-  //   },
-  //   songs: [],
-  //   userIsLoaded: false,
-  // })
+  const [isLoading, setIsLoading] = useState(true);
+  const [songList, setSongList] = useState([]);
+  const [userData, setUserData] = useState({
+    temperature: null,
+    city: '',
+  });
 
-  // const { 
-  //   location: userLocation,
-  //   locationError,
-  //   temperature: userTemperature, 
-  //   temperatureError,
-  //   isLoaded: temperatureIsLoaded 
-  // } = useWeather();
+  const data = useUserData();
+  console.log(data);
 
-  // const SongsGenre = getGenre(userTemperature);
+  useEffect(() => {
+    setUserData({
+      temperature: data.temperature,
+      city: data.location.city,
+    });
+    setSongList(data.songs);
+  }, [])
+    
+  const addSongsToList = () => {
+    setSongList(data.songs);
+    if(songList) {
+      setIsLoading(false);
+      console.log(songList);
+    } else {
+      console.log('song list does not exist');
+    }
+  }
 
-  // //getting songs array with useSongByGenre hook
-  // const {
-  //   songs: userSongs, 
-  //   isLoaded: songsIsLoaded 
-  // } = useSongByGenre(SongsGenre, temperatureIsLoaded);
-
-  //   //set user data state - maybe do it in another component
-  //   useEffect(() => {
-  //     // const timer = setTimeout(() => {
-  //       if(!userTemperature || !userLocation || !userSongs) {
-  //         console.log('still loading data');
-  //       } else {
-  //         setUserData({
-  //         temperature: userTemperature,
-  //         location: userLocation,
-  //         songs: userSongs,
-  //         isLoaded: true,
-  //       })
-  //       }
-  //     //  }, 1000);
-      
-  //     // return () => clearTimeout(timer);
-  //   }, [userSongs])
-  
-    //get userData
-    const userData = useUserData();
-    const { temperature, location, songs, isLoaded } = userData;
-  
-  
   return (
     <Container>
-      {
-        isLoaded ? `location: ${JSON.stringify(location)} temperature: ${temperature}` : <div>Loading...</div>
-      }
+      {/* {
+        userData.isLoaded ? `location: ${JSON.stringify(userData.location)} temperature: ${userData.temperature}` : <div>Loading...</div>
+      } */}
+      {isLoading && <Title>Loading...</Title>}
+      {songList && <SongList songs={songList} />}
+      {/* <FavoriteSongs userFavorites={songList} /> */}
+      
+      <Button onClick={addSongsToList}>get songs</Button>
     </Container>
   )
 }

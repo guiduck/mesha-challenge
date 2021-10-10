@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
 import getGenre from '../utils/getGenre'
 
@@ -39,19 +39,12 @@ const useUserData = () => {
 
   //set user data state - maybe do it in another component
   useEffect(() => {
-    // const timer = setTimeout(() => {
-      if(locationIsLoaded && temperatureIsLoaded && songsIsLoaded) {
         setUserData({
           temperature: userTemperature,
           location: userLocation,
           songs: userSongs,
           isLoaded: true, 
         });
-      } else {console.log('some hook did not load')}
-      
-    //  }, 1000);
-    
-    // return () => clearTimeout(timer);
   }, [])
 
   return userData;
