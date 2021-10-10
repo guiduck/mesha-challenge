@@ -1,17 +1,20 @@
 import { useState, useEffect } from 'react';
+
 import axios from 'axios'
 
-const useWeather = (url, location ) => {
+const useWeather = (location) => {
 
+  const [isLoaded, setIsLoaded] = useState(false);
   const [temperature, setTemperature] = useState(null);
   const [error, setError] = useState();
 
   // const fahrenheitToCelsius = fahrenheit => (fahrenheit - 32) * 5/9;
 
   useEffect(() => {
+    
     const options = {
       method: 'GET',
-      url: url,
+      url: 'https://community-open-weather-map.p.rapidapi.com/weather',
       params: {
         q: `${location.city}, ${location.country}`,
         id: '2172797',
@@ -27,30 +30,34 @@ const useWeather = (url, location ) => {
     
     const loadData = async () => {
       try{
-        const response = await axios.request(options)
-        if (!response.data) {
-          setError('could not get weather from api')
-        } else {
-          return response.data;
-        }
+        
+          const response = await axios.request(options);
+          if (!response.data) {
+            setError('could not get weather from api');
+          } else {
+            return response.data;
+          }
+              
       } catch(err) {
-        setError(err.message)
+        setError(err.message);
       }
-      
     }
 
     (async () => {
       const data = await loadData();
       setTemperature(data.main.temp);
-      if(temperature) console.log(temperature)
+      if(temperature) {
+        console.log(temperature);
+        setIsLoaded(true);
+      } 
     })()
 
     return () => console.log('clean up')
-  }, [url])
+  }, [])
 
   // setTemperature(fahrenheitToCelsius(data))
 
-  return { temperature, error }
+  return { temperature, error, isLoaded }
 }
 
 export default useWeather;

@@ -1,29 +1,68 @@
-import React, { useState } from 'react'
-import useLocation from '../../hooks/useLocation'
-import useWeather from '../../hooks/useWeather'
-import useSongByGenre from '../../hooks/useSongByGenre'
+import React, { useState, useEffect } from 'react'
+import useUserData from '../../hooks/useUserData';
+
+// import getGenre from '../../utils/getGenre'
+
+// import useWeather from '../../hooks/useWeather'
+// import useSongByGenre from '../../hooks/useSongByGenre'
 
 import { Container } from './styles'
 
 export default function Main() {
 
-  const { location, locationError } = useLocation();
+  // const [userData, setUserData] = useState({
+  //   temperature: null,
+  //   location: {
+  //     city: '',
+  //     country: '',
+  //   },
+  //   songs: [],
+  //   userIsLoaded: false,
+  // })
 
-  const url = 'https://community-open-weather-map.p.rapidapi.com/weather';
+  // const { 
+  //   location: userLocation,
+  //   locationError,
+  //   temperature: userTemperature, 
+  //   temperatureError,
+  //   isLoaded: temperatureIsLoaded 
+  // } = useWeather();
 
-  const { temperature, temperatureError } = useWeather( url, location);
+  // const SongsGenre = getGenre(userTemperature);
 
-  const songs = useSongByGenre('POP');
+  // //getting songs array with useSongByGenre hook
+  // const {
+  //   songs: userSongs, 
+  //   isLoaded: songsIsLoaded 
+  // } = useSongByGenre(SongsGenre, temperatureIsLoaded);
 
-  console.log(temperature)
-
-  console.log(location)
+  //   //set user data state - maybe do it in another component
+  //   useEffect(() => {
+  //     // const timer = setTimeout(() => {
+  //       if(!userTemperature || !userLocation || !userSongs) {
+  //         console.log('still loading data');
+  //       } else {
+  //         setUserData({
+  //         temperature: userTemperature,
+  //         location: userLocation,
+  //         songs: userSongs,
+  //         isLoaded: true,
+  //       })
+  //       }
+  //     //  }, 1000);
+      
+  //     // return () => clearTimeout(timer);
+  //   }, [userSongs])
+  
+    //get userData
+    const userData = useUserData();
+    const { temperature, location, songs, isLoaded } = userData;
+  
+  
   return (
     <Container>
-      hallo world
-
       {
-        location ? JSON.stringify(location) : 'location is not available'
+        isLoaded ? `location: ${JSON.stringify(location)} temperature: ${temperature}` : <div>Loading...</div>
       }
     </Container>
   )

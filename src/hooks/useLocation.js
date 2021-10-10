@@ -3,7 +3,8 @@ import axios from 'axios'
 
 const useLocation = () => {
 
-  const [error, setError] = useState('')
+  const [error, setError] = useState('');
+  const [isLoaded, setIsLoaded] = useState(false);
   const [location, setLocation] = useState({
     city:'', country:''
   });
@@ -26,6 +27,7 @@ const useLocation = () => {
         if(!response.data) {
          setError('could not get location rom api')
         } else {
+          console.log(response.data)
           return response.data;
         }
       } catch(err) {
@@ -36,14 +38,18 @@ const useLocation = () => {
 
     (async ()=> {
       const data = await loadData();
+      
       if(data)setLocation({
-        city: data.city,
-        country: data.country
-      })
+          city: data.city,
+          country: data.country
+        })
+        if(location.city) {
+          setIsLoaded(true);
+        }
     })()
   }, [])
 
-  return { location, error }
+  return { location, error, isLoaded }
 }
 
 export default useLocation;
