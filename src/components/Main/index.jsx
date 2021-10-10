@@ -35,9 +35,10 @@ export default function Main() {
       {/* {isLoading && <Title>Loading...</Title>}
       {songList && <SongList songs={songList} />} */}
       {/* <FavoriteSongs userFavorites={songList} /> */}
-      <SongList />
+      
 
       {
+        data && <SongList />,
         userIsLoading && <div>Loading...</div>,
         !userIsLoading && <FavoriteSongs userFavorites={userFavorites} />
       }

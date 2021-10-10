@@ -1,5 +1,7 @@
 import React from 'react';
 
+import useUserData from '../../hooks/useUserData';
+
 import { 
   Container,
   Thumbnail,
@@ -12,6 +14,15 @@ export default function SongItem({
   thumbnail, 
   songName
 }) {
+
+  const { songList } = useUserData();
+
+  const handleAddToFavorites = () => {
+
+    const newFavorite = songList.filter((song) => song.title === songName);
+
+    localStorage.setItem('favorites', JSON.stringify(newFavorite));
+  }
   
   return (
     <Container>
@@ -23,7 +34,7 @@ export default function SongItem({
           <span>{songName}</span>
         </Info>
       </div>
-      <AddButton>
+      <AddButton onClick={handleAddToFavorites}>
         Add song
       </AddButton>      
     </Container>

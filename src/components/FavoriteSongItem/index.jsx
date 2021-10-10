@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { 
   Container,
@@ -12,6 +12,18 @@ export default function FavoriteSongItem({
   thumbnail, 
   songName
 }) {
+
+  const [favorites, setFavorites] = useState();
+
+  useEffect(() => {
+    setFavorites(getLocalData());
+  }, [])
+  
+  const getLocalData = () => {
+    const localData = localStorage.getItem('favorites');
+
+    return localData ? JSON.parse(localData) : [];
+  }
 
   // const [favorites, setFavorites] = useState(userFavorites);
 
