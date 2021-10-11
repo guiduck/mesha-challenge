@@ -25,7 +25,6 @@ export default function Main() {
     setCountry(countryInput)
   }
 
-
   return (
     <UserDataProvider useMyLocation={useMyLocation} city={city} country={country}>
       <Container centerContent mt={10}>

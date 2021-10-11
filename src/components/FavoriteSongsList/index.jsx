@@ -5,6 +5,12 @@ const FavoriteSongsList = () => {
 
   const songs = JSON.parse(localStorage.getItem('favorites'));
 
+  //check if is favorite to see if it need a date prop
+  const songIsFavorited = (id) => {
+    const favorites = JSON.parse(localStorage.getItem('favorites'));
+    return favorites?.find(song => song.id === id);
+  }
+
   console.log({songs})
 
   return (
@@ -18,8 +24,9 @@ const FavoriteSongsList = () => {
               key={song.id}
               artistName={song.artistName} 
               songName={song.songName} 
-              thumbnail={song.thumbnail} 
-          />
+              thumbnail={song.thumbnail}
+              date={songIsFavorited? song.currentDate : undefined} 
+            />
           )          
         })
       }

@@ -11,7 +11,8 @@ export default function SongItem({
   artistName, 
   thumbnail, 
   songName,
-  id
+  id,
+  date
 }) {
 
   const forceUpdate = useForceUpdate();
@@ -22,8 +23,16 @@ export default function SongItem({
   }
 
   const handleClickItem = () => {
+
+    //testing getting date
+  
+    const currentDate = new Date().toLocaleString() + "";
+
+    console.log(currentDate);
+
     const favorites = JSON.parse(localStorage.getItem('favorites'));
 
+    //check if song is favorited to decide either to add or delete
     if (songIsFavorited()) {
       // remove item
       const newFavorites = favorites.filter(song => song.id !== id);
@@ -31,9 +40,10 @@ export default function SongItem({
     } else {
       // add item
       if (!favorites) {
-        localStorage.setItem('favorites', JSON.stringify([{ artistName, thumbnail, songName, id }]));
+        localStorage.setItem('favorites', JSON.stringify([{ artistName, thumbnail, songName, id, currentDate }]));
       } else {
-        localStorage.setItem('favorites', JSON.stringify([...favorites, { artistName, thumbnail, songName, id }]));
+        //if there is already a fav, just add new song data
+        localStorage.setItem('favorites', JSON.stringify([...favorites, { artistName, thumbnail, songName, id, currentDate }]));
       }
     }
 
@@ -49,6 +59,7 @@ export default function SongItem({
         <div>
           <strong>{artistName}</strong>
           <span>{songName}</span>
+          <span>{date}</span>
         </div>
       </div>
       <Button onClick={handleClickItem} colorScheme={songIsFavorited() ? 'red' : 'green'} variant='outline'>
