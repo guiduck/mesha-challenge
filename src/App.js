@@ -33,7 +33,7 @@ function App() {
       <NavBar />
 
       <Switch>
-        <Route path={routes.main.path}>
+        <Route exact path={routes.main.path}>
           <Main />
         </Route>        
         <Route path={routes.favorites.path}>

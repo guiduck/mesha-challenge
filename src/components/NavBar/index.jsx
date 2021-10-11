@@ -11,7 +11,7 @@ import {
 
 export default function NavBar() {
   return (
-    <Router>
+
       <Menu>
       <MenuButton as={Button} colorScheme="blackAlpha">
         Go to
@@ -26,7 +26,7 @@ export default function NavBar() {
         </RouteLink>                   
       </MenuList>
       </Menu>
-    </Router>
+
     
   );
 }

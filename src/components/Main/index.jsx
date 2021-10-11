@@ -31,16 +31,15 @@ export default function Main() {
         <Flex width='full' gridGap='2'>
           <Input value={cityInput} onChange={(e) => setCityInput(e.target.value)} placeholder="Rio de Janeiro" />
           <Input value={countryInput} onChange={(e) => setCountryInput(e.target.value)} placeholder="Brazil" />
-          <Button onClick={onClickUseCustomLocation} w='full'>Submeter</Button>
+          <Button onClick={onClickUseCustomLocation} w='full'>Buscar</Button>
         </Flex>
         <Button my={4} w='full' onClick={onClickUseMyLocation}>Usar minha localização</Button>
 
         <Flex>
-          <AllSongsList />
-
           <Heading as="h3" size="lg">
-            Favorite Songs
+            Musicas por clima
           </Heading>
+          <AllSongsList />          
           <FavoriteSongsList />
         </Flex>
 

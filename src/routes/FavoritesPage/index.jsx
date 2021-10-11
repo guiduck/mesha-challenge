@@ -16,7 +16,7 @@ export default function Favorites() {
   return (
     <Container centerContent>
       <Heading as="h3" size="lg">
-          Favorite Songs
+          Suas Favoritas
       </Heading>
       <FavoriteSongsList />
     </Container>   
