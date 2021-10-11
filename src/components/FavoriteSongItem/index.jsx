@@ -1,11 +1,5 @@
+import { Button } from '@chakra-ui/button';
 import React, { useState, useEffect } from 'react'
-
-import { 
-  Container,
-  Thumbnail,
-  Info,
-  DeleteButton
-} from './styles';
 
 export default function FavoriteSongItem({
   artistName, 
@@ -25,24 +19,19 @@ export default function FavoriteSongItem({
     return localData ? JSON.parse(localData) : [];
   }
 
-  // const [favorites, setFavorites] = useState(userFavorites);
-
-  // const handleDelete = (name) => {
-  //   const newFavorites = userFavorites.filter((favorite) => favorite.artist.name !== name);
-  //   setFavorites(newFavorites);
-  // }
-
   return (
-    <Container>
+    <div>
       <div>
         {/* <Thumbnail src={thumbnail} /> */}
-        <Thumbnail imgUrl={thumbnail} />
-        <Info>
+        <div style={{backgroundImage: `url(${thumbnail})`, height: '50px', width: '50px'}} />
+        <div>
           <strong>{artistName}</strong>
           <span>{songName}</span>
-        </Info>
-      </div>     
-      <DeleteButton >Delete song</DeleteButton>
-    </Container>
+        </div>
+      </div>
+      <Button>
+        Delete song
+      </Button>      
+    </div>
   )
 }

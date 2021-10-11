@@ -1,31 +1,31 @@
 import React, { useState, useEffect } from 'react';
+import { useUserData } from '../../context/userDataProvider';
 import SongItem from '../SongItem';
 
-import useUserData from '../../hooks/useUserData';
-
-import { Container } from './styles';
 
 export default function SongList() {
 
   const[songs, setSongs] = useState([]);
 
+  
+  const userData = useUserData();
+
+
   useEffect(() => {
     if(userData) {
       setSongs(userData.songs);
     }
-  }, [songs])
-
-  const userData = useUserData();
-  console.log(userData);
-
+  }, [userData])
  
   return (
-    <Container>
+    <div>
       {
         songs &&
         songs.map((song) => {
           return(
             <SongItem 
+              id={song.id}
+              key={song.id}
               artistName={song.artist.name} 
               songName={song.title} 
               thumbnail={song.album.cover_medium} 
@@ -33,6 +33,6 @@ export default function SongList() {
           )          
         })
       }
-    </Container>
+    </div>
   )
 }

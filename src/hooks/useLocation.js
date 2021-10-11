@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios'
 
-const useLocation = () => {
+const useLocation = (canRequest) => {
 
   const [error, setError] = useState('');
   const [isLoaded, setIsLoaded] = useState(false);
@@ -27,27 +27,29 @@ const useLocation = () => {
         if(!response.data) {
          setError('could not get location rom api')
         } else {
-          console.log(response.data)
           return response.data;
         }
       } catch(err) {
-        console.error(error);
         setError(err.message);
-      };
-    }      
+        };
+      }
 
-    (async ()=> {
-      const data = await loadData();
-      
-      if(data)setLocation({
-          city: data.city,
-          country: data.country
-        })
-        if(location.city) {
+    if (canRequest) {
+      (async ()=> {
+        const data = await loadData();
+        
+        if(data?.city && data?.country) {
+          setLocation({
+            city: data.city,
+            country: data.country
+          });
+  
           setIsLoaded(true);
         }
-    })()
-  }, [])
+      })()
+    }
+   
+  }, [canRequest])
 
   return { location, error, isLoaded }
 }

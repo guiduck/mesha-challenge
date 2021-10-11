@@ -1,23 +1,13 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const useSongByGenre = (genre) => {
+const useSongByGenre = (genre, canRequest) => {
 
   const [songs, setSongs] = useState();
   const [error, setError] = useState();
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    // const options = {
-    //   method: 'GET',
-    //   url: 'https://shazam-core.p.rapidapi.com/v1/charts/genre-world',
-    //   params: {genre_code: genre, limit: '10'},
-    //   headers: {
-    //     'x-rapidapi-host': 'shazam-core.p.rapidapi.com',
-    //     'x-rapidapi-key': '0b8b88299dmsh633d177b4830bb2p1f4e62jsn9a410c7e91fc'
-    //   }
-    // };
-
     const options = {
       method: 'GET',
       url: 'https://deezerdevs-deezer.p.rapidapi.com/search',
@@ -41,17 +31,19 @@ const useSongByGenre = (genre) => {
       }
       
     }
+    if (canRequest) {
+      (async () => {
+        const data = await loadData();
+  
+        if(data) {
+          setSongs(data);
+          setIsLoaded(true);
+        }
+      })()
+    }
+  }, [canRequest, genre]);
 
-    (async () => {
-      const data = await loadData();
-      setSongs(data);
-      if(songs) {
-        console.log(songs);
-        setIsLoaded(true);
-      } 
-    })()
-  }, [])
-  return { songs, error, isLoaded }
+  return { songs, error, isLoaded };
 }
 
 export default useSongByGenre;

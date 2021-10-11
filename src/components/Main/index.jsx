@@ -1,49 +1,51 @@
 import React, { useState } from 'react'
-
-import SongList from '../SongList';
-import FavoriteSongs from '../FavoriteSongs';
-import useUserData from '../../hooks/useUserData';
-
-import { 
-  Container, 
-  GetSongsButton
-} from './styles'
+import { UserDataProvider } from '../../context/userDataProvider';
+import { Button } from '@chakra-ui/button';
+import { Container, Flex, Heading } from '@chakra-ui/layout';
+import { Input } from '@chakra-ui/input';
+import AllSongsList from '../AllSongsList';
+import FavoriteSongsList from '../FavoriteSongsList';
 
 export default function Main() {
-  const [userFavorites, setUserFavorites] = useState([]);
-  const [userIsLoading, setUserIsLoading] = useState(true);
-    
-  const data = useUserData();
-  console.log(data)
 
-  const clickHandler = () => {
-    console.log('has clicked')
-    setUserFavorites(data.songs);
-    if(userFavorites) {
-      console.log(userFavorites);
-      setUserIsLoading(false);
-    } else {
-      console.log('user still loading in main');
-    }
+  const [useMyLocation, setUseMylocation] = useState(false);
+  const [cityInput, setCityInput] = useState('');
+  const [countryInput, setCountryInput] = useState('');
+
+  const [city, setCity] = useState('');
+  const [country, setCountry] = useState('');
+
+  const onClickUseMyLocation = () => {
+    setUseMylocation(true);
+  }
+
+  const onClickUseCustomLocation = () => {
+    setUseMylocation(false);
+    setCity(cityInput);
+    setCountry(countryInput)
   }
 
   return (
-    <Container>
-      {/* {
-        userData.isLoaded ? `location: ${JSON.stringify(userData.location)} temperature: ${userData.temperature}` : <div>Loading...</div>
-      } */}
-      {/* {isLoading && <Title>Loading...</Title>}
-      {songList && <SongList songs={songList} />} */}
-      {/* <FavoriteSongs userFavorites={songList} /> */}
-      
+    <UserDataProvider useMyLocation={useMyLocation} city={city} country={country}>
+      <Container centerContent mt={10}>
+        <Flex width='full' gridGap='2'>
+          <Input value={cityInput} onChange={(e) => setCityInput(e.target.value)} placeholder="Rio de Janeiro" />
+          <Input value={countryInput} onChange={(e) => setCountryInput(e.target.value)} placeholder="Brazil" />
+          <Button onClick={onClickUseCustomLocation} w='full'>Submeter</Button>
+        </Flex>
+        <Button my={4} w='full' onClick={onClickUseMyLocation}>Usar minha localização</Button>
 
-      {
-        data && <SongList />,
-        userIsLoading && <div>Loading...</div>,
-        !userIsLoading && <FavoriteSongs userFavorites={userFavorites} />
-      }
-      
-      <GetSongsButton onClick={clickHandler}>get songs</GetSongsButton>
-    </Container>
-  )
+        <Flex>
+          <AllSongsList />
+
+          <Heading as="h3" size="lg">
+            Favorite Songs
+          </Heading>
+          <FavoriteSongsList />
+        </Flex>
+
+      </Container>
+    </UserDataProvider>
+
+  );
 }

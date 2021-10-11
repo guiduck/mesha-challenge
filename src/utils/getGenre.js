@@ -8,7 +8,7 @@ const getGenre = (temp) => {
   } else if (temp < 16) {
     return 'LOFI';
   } else {
-    console.log('temperature is not valid');
+    //console.log('temperature is not valid');
   }
 }
 

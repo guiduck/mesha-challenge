@@ -1,21 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import FavoriteSongItem from '../FavoriteSongItem';
 
-import { Container } from './styles';
-
 export default function FavoriteSongs({userFavorites}) {
 
-  const [favorites, setFavorites] = useState(userFavorites);
-
-  useEffect(() => {
-    setFavorites(userFavorites);
-  }, [favorites])
-
   return (
-    <Container>
+    <div>
       {
-        favorites &&
-        favorites.map((song) => {
+        userFavorites &&
+        userFavorites.map((song) => {
         return (
           <>
             <FavoriteSongItem
@@ -26,6 +18,6 @@ export default function FavoriteSongs({userFavorites}) {
           </>
         )
       })}
-    </Container>
+    </div>
   )
 }

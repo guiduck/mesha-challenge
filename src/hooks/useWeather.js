@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 
 import axios from 'axios'
 
-const useWeather = (location) => {
+const useWeather = (location, canRequest) => {
+  const [loading, setLoading] = useState(false);
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [temperature, setTemperature] = useState(null);
@@ -30,32 +31,30 @@ const useWeather = (location) => {
     
     const loadData = async () => {
       try{
-        
+          setLoading(true);
           const response = await axios.request(options);
           if (!response.data) {
             setError('could not get weather from api');
           } else {
             return response.data;
           }
-              
+          setLoading(false);  
       } catch(err) {
+        setLoading(false);
         setError(err.message);
       }
     }
 
-    (async () => {
-      const data = await loadData();
-      setTemperature(data.main.temp);
-      if(temperature) {
-        console.log(temperature);
-        setIsLoaded(true);
-      } 
-    })()
-
-    return () => console.log('clean up')
-  }, [location])
-
-  // setTemperature(fahrenheitToCelsius(data))
+    if (canRequest && location.city !== '' && location.country !== '') {
+      (async () => {
+        const data = await loadData();
+        if (data?.main?.temp) {
+          setTemperature(data.main.temp);
+          setIsLoaded(true);
+        }
+      })()
+    }
+  }, [location, canRequest]);
 
   return { temperature, error, isLoaded }
 }
