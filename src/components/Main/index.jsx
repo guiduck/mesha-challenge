@@ -5,6 +5,7 @@ import { Container, Flex, Heading } from '@chakra-ui/layout';
 import { Input } from '@chakra-ui/input';
 import AllSongsList from '../AllSongsList';
 import FavoriteSongsList from '../FavoriteSongsList';
+import { useColorModeValue } from '@chakra-ui/color-mode';
 
 export default function Main() {
 
@@ -25,15 +26,19 @@ export default function Main() {
     setCountry(countryInput)
   }
 
+  const buttonBackgroundColor = useColorModeValue('gray.400', 'whiteAlpha.200');
+  const inputBackgroundColor = useColorModeValue('gray.200', 'gray.700');
+
   return (
+
     <UserDataProvider useMyLocation={useMyLocation} city={city} country={country}>
       <Container centerContent mt={10}>
         <Flex width='full' gridGap='2'>
-          <Input value={cityInput} onChange={(e) => setCityInput(e.target.value)} placeholder="Rio de Janeiro" />
-          <Input value={countryInput} onChange={(e) => setCountryInput(e.target.value)} placeholder="Brazil" />
-          <Button onClick={onClickUseCustomLocation} w='full'>Buscar</Button>
+          <Input bg={inputBackgroundColor} value={cityInput} onChange={(e) => setCityInput(e.target.value)} placeholder="Rio de Janeiro" />
+          <Input bg={inputBackgroundColor} value={countryInput} onChange={(e) => setCountryInput(e.target.value)} placeholder="Brazil" />
+          <Button bg={buttonBackgroundColor} onClick={onClickUseCustomLocation} w='full'>Buscar</Button>
         </Flex>
-        <Button my={4} w='full' onClick={onClickUseMyLocation}>Usar minha localização</Button>
+        <Button bg={buttonBackgroundColor} my={4} w='full' onClick={onClickUseMyLocation}>Usar minha localização</Button>
 
         <Flex>
           <Heading as="h3" size="lg">
