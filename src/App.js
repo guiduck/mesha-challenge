@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import Main from './components/Main';
 import Favorites from './routes/FavoritesPage';
 import NavBar from './components/NavBar';
@@ -6,6 +7,8 @@ import {
   Switch,
   Route
 } from 'react-router-dom';
+
+import  { useColorMode, useColorModeValue, Button, Container, Flex } from '@chakra-ui/react';
 
 export const routes = {
   main: {
@@ -23,23 +26,35 @@ export const routes = {
     name: 'page not found'
   }
 }
-  
-
 
 function App() {
+
+  const { toggleColorMode } = useColorMode();
+  const colorBackground = useColorModeValue('gray.100', 'gray.700'); 
+
   return (
     <Router>
+      
+      <Container p={10} mt={-10} background={colorBackground}>
+      <Flex direction='column'>
+      <Button onClick={toggleColorMode} variant='tean' >THEME</Button>
+        <NavBar />
 
-      <NavBar />
+        <Switch>
+          <Route exact path={routes.main.path}>
+            <Main />
+          </Route>        
+          <Route path={routes.favorites.path}>
+            <Favorites />
+          </Route>
+        </Switch> 
+      </Flex>
+      
 
-      <Switch>
-        <Route exact path={routes.main.path}>
-          <Main />
-        </Route>        
-        <Route path={routes.favorites.path}>
-          <Favorites />
-        </Route>
-      </Switch>
+        
+      </Container>
+            
+     
     </Router>
   );
 }

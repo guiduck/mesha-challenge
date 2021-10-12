@@ -6,27 +6,34 @@ import {
   MenuList,
   MenuItem,
   MenuDivider,
-  Button
+  Button, 
+  Flex,
+  Container
 } from "@chakra-ui/react"
 
 export default function NavBar() {
   return (
-
-      <Menu>
-      <MenuButton as={Button} colorScheme="blackAlpha">
-        Go to
+      <Container>
+        <Flex alignItems='center' mt={10}>
+        <Menu >
+      <MenuButton as={Button} w='full' colorScheme="blackAlpha">
+        Ir para...
       </MenuButton>
       <MenuList>    
         <RouteLink to='/'>
-          <MenuItem>Main</MenuItem>
+          <MenuItem>Início</MenuItem>
         </RouteLink>                         
       <MenuDivider />  
         <RouteLink to='/favorites'>
-          <MenuItem>Favorites</MenuItem> 
+          <MenuItem>Favoritas</MenuItem> 
         </RouteLink>                   
       </MenuList>
       </Menu>
 
+      </Flex>
+      </Container>
+      
+      
     
   );
 }
