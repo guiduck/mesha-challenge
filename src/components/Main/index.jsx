@@ -32,7 +32,7 @@ export default function Main() {
   return (
 
     <UserDataProvider useMyLocation={useMyLocation} city={city} country={country}>
-      <Container centerContent mt={10}>
+      <Container centerContent mt={10} >
         <Flex width='full' gridGap='2'>
           <Input bg={inputBackgroundColor} value={cityInput} onChange={(e) => setCityInput(e.target.value)} placeholder="Rio de Janeiro" />
           <Input bg={inputBackgroundColor} value={countryInput} onChange={(e) => setCountryInput(e.target.value)} placeholder="Brazil" />
@@ -40,12 +40,12 @@ export default function Main() {
         </Flex>
         <Button bg={buttonBackgroundColor} my={4} w='full' onClick={onClickUseMyLocation}>Usar minha localização</Button>
 
-        <Flex>
-          <Heading as="h3" size="lg">
-            Musicas por clima
+        <Flex direction='column'>
+          <Heading as="h3" size="lg" alignSelf='center'>
+            Musicas
           </Heading>
           <AllSongsList />          
-          <FavoriteSongsList />
+          {/* <FavoriteSongsList /> */}
         </Flex>
 
       </Container>

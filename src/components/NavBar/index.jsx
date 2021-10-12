@@ -10,7 +10,9 @@ import {
   Flex,
   Container,
   useColorModeValue
-} from "@chakra-ui/react"
+} from "@chakra-ui/react";
+
+import { HamburgerIcon } from '@chakra-ui/icons';
 
 export default function NavBar() {
 
@@ -22,7 +24,7 @@ export default function NavBar() {
         <Flex alignItems='center' mt={10}>
           <Menu >
             <MenuButton bg={buttonBackgroundColor} color={buttonTextColor} as={Button} w='full' colorScheme="blackAlpha">
-              Ir para...
+              <HamburgerIcon />
             </MenuButton>
             <MenuList >    
               <RouteLink to='/'>

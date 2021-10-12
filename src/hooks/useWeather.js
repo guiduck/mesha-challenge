@@ -25,7 +25,7 @@ const useWeather = (location, canRequest) => {
       },
       headers: {
         'x-rapidapi-host': 'community-open-weather-map.p.rapidapi.com',
-        'x-rapidapi-key': '0b8b88299dmsh633d177b4830bb2p1f4e62jsn9a410c7e91fc'
+        'x-rapidapi-key': '3105f08943mshacdd754016c1a6cp162d29jsn9099e1ca6732'
       }
     };
     

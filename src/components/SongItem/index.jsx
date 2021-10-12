@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Button } from '@chakra-ui/button';
+import { Button, Flex, Container, Spacer } from '@chakra-ui/react';
+import { DeleteIcon } from '@chakra-ui/icons';
 
 //forceUpdate hook
 function useForceUpdate(){
@@ -46,25 +47,37 @@ export default function SongItem({
         localStorage.setItem('favorites', JSON.stringify([...favorites, { artistName, thumbnail, songName, id, currentDate }]));
       }
     }
-
     forceUpdate();
   }
-
   
   return (
-    <div>
-      <div>
+    <Container mt={5}>
+      <Flex  direction='row' w='390px' h='100px' alignItems='center' justify='space-between'>
+       
         {/* <Thumbnail src={thumbnail} /> */}
-        <div style={{backgroundImage: `url(${thumbnail})`, height: '50px', width: '50px'}} />
-        <div>
-          <strong>{artistName}</strong>
-          <span>{songName}</span>
-          <span>{date}</span>
-        </div>
-      </div>
-      <Button onClick={handleClickItem} colorScheme={songIsFavorited() ? 'red' : 'green'} variant='outline'>
-        {!songIsFavorited() ? 'Adicionar aos favoritos' : 'Remover dos Favoritos'}
-      </Button>      
-    </div>
+        
+        <Flex borderRadius='full' style={{backgroundImage: `url(${thumbnail})`, backgroundSize:'cover', minHeight: '75px', minWidth: '75px'}} />
+        
+        <Flex ml={5} mr={5} direction='row'>
+          <Flex direction='column'>
+            <strong>{artistName}</strong>
+            <Spacer />
+            <span>{songName}</span>
+            <Spacer />
+          </Flex>
+          <Flex direction='column'>
+            {date && 
+              <Flex alignSelf='flex-end' >
+                <span>{date}</span>
+              </Flex>
+            }
+            <Button onClick={handleClickItem} colorScheme={songIsFavorited() ? 'red' : 'green'} variant='outline'>
+              {!songIsFavorited() ? `Adicionar aos favoritos` : `Remover dos favoritos`}
+            </Button>   
+          </Flex>          
+        </Flex>       
+      </Flex>    
+    
+    </Container>      
   )
 }

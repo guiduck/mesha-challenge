@@ -15,10 +15,16 @@ export default function Favorites() {
 
   return (
     <Container centerContent>
-      <Heading as="h3" size="lg">
-          Suas Favoritas
-      </Heading>
-      <FavoriteSongsList />
-    </Container>   
+      <Flex direction='column' mt={8} alignItems='center'>
+        <Heading as="h3" size="lg">
+            Suas Favoritas
+        </Heading>
+        <Flex mt={10}>
+          <FavoriteSongsList  />
+        </Flex>
+        
+      </Flex>
+    </Container> 
+    
   )
 }

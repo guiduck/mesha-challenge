@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Main from './components/Main';
 import Favorites from './routes/FavoritesPage';
 import NavBar from './components/NavBar';
@@ -7,6 +7,8 @@ import {
   Switch,
   Route
 } from 'react-router-dom';
+
+import {MoonIcon, SunIcon} from '@chakra-ui/icons';
 
 import  { useColorMode, useColorModeValue, Button, Container, Flex } from '@chakra-ui/react';
 
@@ -36,25 +38,21 @@ function App() {
     <Router>
       
       <Container p={10} mt={-10} background={colorBackground}>
-      <Flex direction='column'>
-      <Button onClick={toggleColorMode} variant='tean' >THEME</Button>
-        <NavBar />
-
-        <Switch>
-          <Route exact path={routes.main.path}>
-            <Main />
-          </Route>        
-          <Route path={routes.favorites.path}>
-            <Favorites />
-          </Route>
-        </Switch> 
-      </Flex>
-      
-
-        
-      </Container>
-            
-     
+        <Flex direction='column'>
+          <Button onClick={toggleColorMode} width='30px' variant='tean' >
+          <SunIcon /> / <MoonIcon />
+          </Button>
+          <NavBar />
+          <Switch>
+            <Route exact path={routes.main.path}>
+              <Main />
+            </Route>        
+            <Route path={routes.favorites.path}>
+              <Favorites />
+            </Route>
+          </Switch> 
+        </Flex>            
+      </Container>                 
     </Router>
   );
 }

@@ -34,7 +34,6 @@ const useSongByGenre = (genre, canRequest) => {
     if (canRequest) {
       (async () => {
         const data = await loadData();
-  
         if(data) {
           setSongs(data);
           setIsLoaded(true);
