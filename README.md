@@ -53,9 +53,9 @@ yarn start
 yarn build 
 ```
 ## Screenshots
-![MenuDark](https://github.com/guiduck/mesha-challenge/blob/main/WhatsApp%20Image%202021-10-12%20at%2020.37.50.jpeg)
-![MainPageDark](https://github.com/guiduck/mesha-challenge/blob/main/WhatsApp%20Image%202021-10-12%20at%2020.40.20.jpeg)
-![MainPageLight](https://github.com/guiduck/mesha-challenge/blob/main/WhatsApp%20Image%202021-10-12%20at%2020.48.33.jpeg)
-![FavoritesPageDark](https://github.com/guiduck/mesha-challenge/blob/main/WhatsApp%20Image%202021-10-12%20at%2020.47.49.jpeg)
-![FavoritesPageLight](https://github.com/guiduck/mesha-challenge/blob/main/WhatsApp%20Image%202021-10-12%20at%2020.48.11.jpeg)
-![LightSearchByUserLocation](https://github.com/guiduck/mesha-challenge/blob/main/WhatsApp%20Image%202021-10-12%20at%2020.49.03.jpeg)
+![MenuDark](https://github.com/guiduck/mesha-challenge/blob/main/public/images/MenuDark.jpeg)
+![MainPageDark](https://github.com/guiduck/mesha-challenge/blob/main/public/images/MainPageDark.jpeg)
+![MainPageLight](https://github.com/guiduck/mesha-challenge/blob/main/public/images/MainPageLight.jpeg)
+![FavoritesPageDark](https://github.com/guiduck/mesha-challenge/blob/main/public/images/FavoritesPageDark.jpeg)
+![FavoritesPageLight](https://github.com/guiduck/mesha-challenge/blob/main/public/images/FavoritesPageLight.jpeg)
+![LightSearchByUserLocation](https://github.com/guiduck/mesha-challenge/blob/main/public/images/LightSearchByUserLocation.jpeg)
